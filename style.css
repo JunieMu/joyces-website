@@ -50,4 +50,22 @@ p, li {
 .goodreads {
     color: #cf7878;
 }
+
+.pink-btn {
+    background-color: #facfcf;
+    border-color: #cf7878;
+    color: #cf7878;
+}
+
+.blue-btn {
+    background-color: #d2dae9;
+    border-color: #8ba9e0;
+    font-family:  "Montserrat", sans-serif;
+}
+
+.yellow-btn {
+    background-color: #fef0d6;
+    border-color: #f2c97f;
+    font-family:  "Montserrat", sans-serif;
+}
   
