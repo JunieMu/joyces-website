@@ -1,0 +1,44 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/work-sans';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Joyce Ma',
+  description =
+    'CS student at Columbia building personal software — projects, experience, and a very fluffy cat.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Vercel Web Analytics (no-op / 404 in local dev — expected) -->
+    <script defer src="/_vercel/insights/script.js"></script>
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      // Decision 13: pause GIF-style autoplay for reduced-motion users
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('video[autoplay]').forEach((v) => {
+            v.removeAttribute('autoplay');
+            v.pause();
+            v.controls = true;
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
