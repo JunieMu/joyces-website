@@ -33,7 +33,7 @@ export const featured: FeaturedProject[] = [
   {
     title: "Joyce's Closet",
     blurb:
-      'Built because I kept staring at my closet every morning: add your clothes, shuffle a full outfit when you can’t decide, re-roll just the shoes if the rest works, and save the combinations you love. It started as a plain HTML/CSS/JS project in 2024 and I rebuilt it from the ground up as a typed, tested React app — still in daily use.',
+      'Built after struggling to find an outfit became a constant hassle for me. You can upload your clothes, shuffle an outfit to find new combos, re-roll certain items, and save the combinations you love. This tested React app is now a part of my daily routine, and there are more features still coming!',
     tech: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Zustand'],
     links: [
       { href: 'https://joyces-closet.vercel.app/', label: 'Live site', primary: true },
@@ -52,7 +52,7 @@ export const featured: FeaturedProject[] = [
   {
     title: 'The Humor Project',
     blurb:
-      'Built for a humor-research course: can you teach an AI what’s funny? The rating app is the public voting site — it loads a study, shows one image and one candidate caption at a time, and writes every “this one’s funny” vote straight into a shared Supabase research dataset. The pipeline workbench is where the humor model gets made: chain prompt steps into a “flavor,” run real generations against known images, read what came back, adjust a constraint, run it again.',
+      'Built for a humor-research course: can you teach an AI what’s funny? The rating app is the public voting site. It loads a study, shows one image and generated caption at a time, and writes every upvote/downvote into a shared Supabase research dataset. The pipeline workbench is where the humor model gets made: chain prompt steps into a “flavor,” run real generations against known images, read what came back, adjust a constraint, run it again.',
     tech: ['Next.js', 'React 19', 'TypeScript', 'Supabase', 'Tailwind CSS'],
     links: [
       { href: 'https://github.com/JunieMu/TheHumorProject1', label: 'Rating app repo' },
@@ -78,7 +78,7 @@ export const featured: FeaturedProject[] = [
       },
     ],
     offlineNote:
-      'The class’s shared Supabase instance has been retired, so signing in no longer works — the videos show both apps running, and all the code is on GitHub.',
+      'The class’s shared Supabase instance has been retired, so signing in no longer works, but the videos show both apps running, and all the code is on GitHub.',
   },
 ];
 
@@ -92,7 +92,7 @@ export const secondary: SecondaryProject[] = [
   {
     title: '2048',
     blurb:
-      'A Java remake of 2048 — with sound effects on every move and memes when you lose.',
+      'A Java remake of 2048 with silly sound effects on every move and memes when you lose.',
     repoUrl: 'https://github.com/JunieMu/Game2048',
   },
 ];
