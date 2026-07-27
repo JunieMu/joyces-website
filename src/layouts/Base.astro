@@ -13,6 +13,8 @@ const {
   description =
     'CS student at Columbia building personal software — projects, experience, and a very fluffy cat.',
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -22,7 +24,14 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
     <!-- Vercel Web Analytics (no-op / 404 in local dev — expected) -->
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
