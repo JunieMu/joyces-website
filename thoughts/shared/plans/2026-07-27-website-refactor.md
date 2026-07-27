@@ -394,9 +394,9 @@ README, commit/push, Vercel import + Analytics, retire GitHub Pages.
 
 #### Automated Verification
 
-- [ ] `git status --porcelain` clean; `git push` accepted
-- [ ] `curl -s -o /dev/null -w '%{http_code}' https://<assigned>.vercel.app` → 200
-- [ ] `curl -s https://<assigned>.vercel.app | grep -c '<h1'` → 1
+- [x] `git status --porcelain` clean; `git push` accepted — `2f6fb61..8bfe0d2 main -> main`
+- [ ] `curl -s -o /dev/null -w '%{http_code}' https://<assigned>.vercel.app` → 200 *(blocked on Joyce's Vercel import)*
+- [ ] `curl -s https://<assigned>.vercel.app | grep -c '<h1'` → 1 *(blocked on Joyce's Vercel import)*
 
 #### Manual Verification
 
