@@ -1,0 +1,44 @@
+---
+import type { SecondaryProject } from '../data/projects';
+
+interface Props {
+  project: SecondaryProject;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="mini">
+  <h3>{project.title}</h3>
+  <p>{project.blurb}</p>
+  <a href={project.repoUrl}>GitHub &rarr;</a>
+</article>
+
+<style>
+  .mini {
+    border-top: 3px solid var(--color-blush);
+    padding-top: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.35em;
+  }
+
+  p {
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    margin-bottom: 0.75rem;
+  }
+
+  a {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-blush);
+  }
+
+  a:hover {
+    border-bottom-color: currentColor;
+  }
+</style>

@@ -1,0 +1,55 @@
+---
+import { NAME, GITHUB, LINKEDIN, GOODREADS, EMAIL } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container bar">
+    <p class="contact">
+      <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    </p>
+    <ul class="socials">
+      <li><a href={GITHUB}>GitHub</a></li>
+      <li><a href={LINKEDIN}>LinkedIn</a></li>
+      <li><a href={GOODREADS}>Goodreads</a></li>
+    </ul>
+    <p class="copyright">&copy; 2026 {NAME}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-blush);
+    background-color: var(--color-blush-wash);
+  }
+
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    padding-block: 2.5rem;
+  }
+
+  .contact {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9375rem;
+  }
+
+  .copyright {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+</style>

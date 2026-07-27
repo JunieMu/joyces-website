@@ -1,0 +1,54 @@
+---
+interface Props {
+  src: string;
+  poster: string;
+  label?: string;
+  width: number;
+  height: number;
+}
+
+const { src, poster, label, width, height } = Astro.props;
+---
+
+<figure style={`--natural-width: ${width}px`}>
+  {label && <figcaption>{label}</figcaption>}
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    width={width}
+    height={height}
+    poster={poster}
+    src={src}
+    aria-label={label ? `${label} demo video` : 'project demo video'}></video>
+</figure>
+
+<style>
+  figure {
+    margin: 0 auto;
+    width: 100%;
+    /* never display larger than the encoded frame — upscaling looks soft */
+    max-width: var(--natural-width);
+  }
+
+  video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--color-blush);
+    background-color: var(--color-blush-wash);
+    box-shadow: 0 12px 32px -20px rgb(36 29 32 / 45%);
+  }
+
+  figcaption {
+    margin-bottom: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+</style>

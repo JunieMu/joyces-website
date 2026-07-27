@@ -1,14 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Projects from '../components/Projects.astro';
+import Experience from '../components/Experience.astro';
+import About from '../components/About.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Base>
+  <Header />
   <main id="top">
-    <section class="container section">
-      <h1>Joyce Ma</h1>
-    </section>
-    <section id="projects" class="container section"></section>
-    <section id="experience" class="container section"></section>
-    <section id="about" class="container section"></section>
+    <Hero />
+    <Projects />
+    <Experience />
+    <About />
   </main>
+  <Footer />
 </Base>

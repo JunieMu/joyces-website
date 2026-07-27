@@ -1,0 +1,32 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import MiniProjectCard from './MiniProjectCard.astro';
+import { featured, secondary } from '../data/projects';
+---
+
+<section id="projects" class="section">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+
+    {featured.map((project, index) => <ProjectCard project={project} index={index} />)}
+
+    <div class="more">
+      <p class="eyebrow">More projects</p>
+      <div class="mini-grid">
+        {secondary.map((project) => <MiniProjectCard project={project} />)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .more {
+    margin-top: var(--space-section);
+  }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 2rem;
+  }
+</style>

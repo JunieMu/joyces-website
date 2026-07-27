@@ -1,0 +1,59 @@
+---
+import { HEYBUDDY_URL } from '../data/site';
+---
+
+<section id="experience" class="section">
+  <div class="container">
+    <h2 class="section-title">Experience</h2>
+
+    <article class="role">
+      <div class="meta">
+        <p class="dates">May &ndash; Aug 2026</p>
+      </div>
+      <div class="body">
+        <h3>
+          Software Engineering Intern &middot; <a href={HEYBUDDY_URL}>HeyBuddy</a>
+        </h3>
+        <p>
+          HeyBuddy is B2B SaaS for customer-success teams. I build software that helps CSMs manage
+          their book of business &mdash; from auto-drafted emails to Buddy investigating accounts so
+          humans don&rsquo;t have to dig.
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .role {
+    display: grid;
+    grid-template-columns: minmax(0, 10rem) minmax(0, 1fr);
+    gap: 1rem 2.5rem;
+    border-top: 1px solid var(--color-blush);
+    padding-top: 1.75rem;
+  }
+
+  .dates {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    margin: 0;
+    padding-top: 0.35rem;
+  }
+
+  h3 {
+    font-size: 1.375rem;
+    margin-bottom: 0.5em;
+  }
+
+  @media (max-width: 40rem) {
+    .role {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.25rem;
+    }
+
+    .dates {
+      padding-top: 0;
+    }
+  }
+</style>

@@ -1,0 +1,164 @@
+---
+import DemoVideo from './DemoVideo.astro';
+import type { FeaturedProject } from '../data/projects';
+
+interface Props {
+  project: FeaturedProject;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const paired = project.videos.length > 1;
+// Single-demo projects alternate media side down the page. A project with two
+// demos goes full width instead, so both recordings stay large enough to read.
+const flipped = !paired && index % 2 === 1;
+---
+
+<article class:list={['project', { flipped, paired }]}>
+  <div class="media">
+    {project.videos.map((video) => <DemoVideo {...video} />)}
+  </div>
+
+  <div class="body">
+    <h3>{project.title}</h3>
+    <p>{project.blurb}</p>
+    {project.offlineNote && <p class="offline">{project.offlineNote}</p>}
+
+    <ul class="tech">
+      {project.tech.map((item) => <li>{item}</li>)}
+    </ul>
+
+    <div class="links">
+      {
+        project.links.map((link) => (
+          <a class:list={['button', { primary: link.primary }]} href={link.href}>
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .project {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: center;
+  }
+
+  .project + .project {
+    margin-top: var(--space-section);
+  }
+
+  .flipped .media {
+    order: 2;
+  }
+
+  .media {
+    display: grid;
+    /* minmax(0,…) keeps the intrinsic video width from forcing the track wider
+       than its container — otherwise the page scrolls sideways on phones */
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  /* Two demos: text on top, both recordings side by side across the full row. */
+  .paired {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .paired .media {
+    order: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 0.4em;
+  }
+
+  .offline {
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+    border-left: 2px solid var(--color-blush);
+    padding-left: 0.875rem;
+  }
+
+  .tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 1.5rem 0;
+    padding: 0;
+  }
+
+  .tech li {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-accent-deep);
+    background-color: var(--color-blush-wash);
+    border: 1px solid var(--color-blush);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .button {
+    display: inline-block;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.5rem 1.15rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    transition: background-color 120ms ease, color 120ms ease;
+  }
+
+  .button:hover {
+    background-color: var(--color-blush-wash);
+    color: var(--color-accent-deep);
+    border-color: var(--color-accent-deep);
+  }
+
+  .button.primary {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+
+  .button.primary:hover {
+    background-color: var(--color-accent-deep);
+    border-color: var(--color-accent-deep);
+    color: #fff;
+  }
+
+  @media (max-width: 52rem) {
+    .project {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.75rem;
+    }
+
+    /* media-first on mobile, regardless of desktop side */
+    .flipped .media {
+      order: 0;
+    }
+
+    .paired .media {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

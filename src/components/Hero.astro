@@ -1,0 +1,55 @@
+---
+import { NAME, GITHUB, LINKEDIN, EMAIL, RESUME } from '../data/site';
+---
+
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow">Computer Science · Columbia University</p>
+    <h1>{NAME}</h1>
+    <p class="intro">
+      I&rsquo;m a CS student at Columbia who builds small, personal software &mdash; a wardrobe
+      planner I use every morning, games, and experiments in whether an AI can learn to be funny.
+      Off-screen: painting, fantasy novels, and a very fluffy cat named Louis.
+    </p>
+    <ul class="links">
+      <li><a href={GITHUB}>GitHub</a></li>
+      <li><a href={LINKEDIN}>LinkedIn</a></li>
+      <li><a href={RESUME}>Resume</a></li>
+      <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(3.5rem, 9vw, 6.5rem) var(--space-section);
+    background-image: linear-gradient(
+      to bottom,
+      var(--color-blush-wash),
+      var(--color-bg) 70%
+    );
+  }
+
+  h1 {
+    margin-bottom: 0.35em;
+  }
+
+  .intro {
+    font-size: clamp(1.0625rem, 1rem + 0.5vw, 1.3125rem);
+    line-height: 1.6;
+    color: var(--color-ink);
+    max-width: 44ch;
+    margin-bottom: 2rem;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+</style>
