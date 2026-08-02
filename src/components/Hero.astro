@@ -1,5 +1,5 @@
 ---
-import { NAME, GITHUB, LINKEDIN, EMAIL, RESUME } from '../data/site';
+import { NAME, GITHUB, LINKEDIN, EMAIL } from '../data/site';
 ---
 
 <section class="hero">
@@ -12,7 +12,6 @@ import { NAME, GITHUB, LINKEDIN, EMAIL, RESUME } from '../data/site';
     <ul class="links">
       <li><a href={GITHUB}>GitHub</a></li>
       <li><a href={LINKEDIN}>LinkedIn</a></li>
-      <li><a href={RESUME}>Resume</a></li>
       <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
     </ul>
   </div>
@@ -23,7 +22,7 @@ import { NAME, GITHUB, LINKEDIN, EMAIL, RESUME } from '../data/site';
     padding-block: clamp(3.5rem, 9vw, 6.5rem) var(--space-section);
     background-image: linear-gradient(
       to bottom,
-      var(--color-blush-wash),
+      var(--color-wash),
       var(--color-bg) 70%
     );
   }

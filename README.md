@@ -32,13 +32,10 @@ src/
   assets/       images optimized at build time
 public/
   videos/       demo MP4s + poster frames
-  resume.pdf    ← placeholder, overwrite with the real resume
 ```
 
 ## Notes
 
-- **`public/resume.pdf` is a placeholder.** Drop the real resume in at that exact
-  path and the hero/nav/footer links pick it up with no code change.
 - Demo videos are generated from screen recordings with ffmpeg; the source
   `.mov` files are gitignored and live only on my machine. To re-encode:
 

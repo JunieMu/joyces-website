@@ -1,5 +1,5 @@
 ---
-import { NAME, GITHUB, LINKEDIN, GOODREADS, EMAIL } from '../data/site';
+import { NAME, GITHUB, LINKEDIN, EMAIL } from '../data/site';
 ---
 
 <footer class="site-footer">
@@ -10,7 +10,6 @@ import { NAME, GITHUB, LINKEDIN, GOODREADS, EMAIL } from '../data/site';
     <ul class="socials">
       <li><a href={GITHUB}>GitHub</a></li>
       <li><a href={LINKEDIN}>LinkedIn</a></li>
-      <li><a href={GOODREADS}>Goodreads</a></li>
     </ul>
     <p class="copyright">&copy; 2026 {NAME}</p>
   </div>
@@ -18,8 +17,8 @@ import { NAME, GITHUB, LINKEDIN, GOODREADS, EMAIL } from '../data/site';
 
 <style>
   .site-footer {
-    border-top: 1px solid var(--color-blush);
-    background-color: var(--color-blush-wash);
+    border-top: 1px solid var(--color-tint);
+    background-color: var(--color-wash);
   }
 
   .bar {

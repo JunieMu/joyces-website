@@ -1,0 +1,237 @@
+---
+/**
+ * Dev-only theme picker. Base.astro renders this behind `import.meta.env.DEV`,
+ * so it is never part of a production build.
+ *
+ * The palettes live in src/data/themes.ts and are compiled to
+ * `:root[data-theme='id']` blocks here — one source of truth, no drift between
+ * the swatch you click and the CSS that applies.
+ */
+import { themes, themeCss } from '../data/themes';
+
+const css = themeCss();
+---
+
+<Fragment set:html={`<style>\n${css}\n</style>`} />
+
+<aside class="picker" data-theme-picker aria-label="Theme picker (development only)">
+  <button
+    class="toggle"
+    type="button"
+    data-toggle
+    aria-expanded="false"
+    aria-controls="theme-picker-panel"
+  >
+    <span class="dot" aria-hidden="true"></span>
+    Theme
+  </button>
+
+  <div class="panel" id="theme-picker-panel" hidden>
+    <p class="hint">Dev only — not in the production build.</p>
+    <ul class="list" role="list">
+      {
+        themes.map((theme) => (
+          <li>
+            <button class="option" type="button" data-theme-option={theme.id}>
+              <span class="swatches" aria-hidden="true">
+                <span style={`background:${theme.tokens.bg}`} />
+                <span style={`background:${theme.tokens.tint}`} />
+                <span style={`background:${theme.tokens.accent}`} />
+                <span style={`background:${theme.tokens.wash}`} />
+              </span>
+              <span class="text">
+                <span class="label">{theme.label}</span>
+                <span class="note">{theme.note}</span>
+              </span>
+              <span class="check" aria-hidden="true">✓</span>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</aside>
+
+<style>
+  /* Intentionally hardcoded: this widget must stay legible while you swap the
+     palette out from under the page, so it cannot use the site's tokens. */
+  .picker {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 9999;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #f5f5f4;
+  }
+
+  .toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-left: auto;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid #45403c;
+    border-radius: 999px;
+    background: #1c1a19;
+    color: inherit;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px -8px rgb(0 0 0 / 55%);
+  }
+
+  .toggle:hover {
+    background: #2a2725;
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--color-tint);
+  }
+
+  .panel {
+    width: 17rem;
+    margin-bottom: 0.5rem;
+    padding: 0.7rem;
+    border: 1px solid #45403c;
+    border-radius: 12px;
+    background: #1c1a19;
+    box-shadow: 0 16px 40px -12px rgb(0 0 0 / 65%);
+  }
+
+  .panel[hidden] {
+    display: none;
+  }
+
+  .hint {
+    margin: 0 0 0.55rem;
+    max-width: none;
+    color: #a8a29e;
+    font-size: 11px;
+  }
+
+  .list {
+    display: grid;
+    gap: 0.3rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.45rem 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .option:hover {
+    background: #2a2725;
+  }
+
+  .option[aria-current='true'] {
+    border-color: #57534e;
+    background: #292524;
+  }
+
+  .swatches {
+    display: grid;
+    flex: none;
+    grid-template-columns: repeat(2, 11px);
+    grid-template-rows: repeat(2, 11px);
+    border: 1px solid #57534e;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .swatches span {
+    display: block;
+  }
+
+  .text {
+    display: grid;
+    min-width: 0;
+  }
+
+  .label {
+    font-weight: 600;
+  }
+
+  .note {
+    color: #a8a29e;
+    font-size: 11px;
+  }
+
+  .check {
+    margin-left: auto;
+    opacity: 0;
+    color: #86efac;
+  }
+
+  .option[aria-current='true'] .check {
+    opacity: 1;
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const KEY = 'joyce-theme';
+    const root = document.documentElement;
+    const picker = document.querySelector('[data-theme-picker]');
+    if (!picker) return;
+
+    const toggle = picker.querySelector('[data-toggle]');
+    const panel = picker.querySelector('.panel');
+    const options = [...picker.querySelectorAll('[data-theme-option]')];
+
+    const apply = (id) => {
+      root.dataset.theme = id;
+      try {
+        localStorage.setItem(KEY, id);
+      } catch {
+        /* private mode — the attribute still applies for this page */
+      }
+      for (const option of options) {
+        option.setAttribute(
+          'aria-current',
+          String(option.dataset.themeOption === id)
+        );
+      }
+    };
+
+    // The head script in Base.astro already restored the choice; fall back to
+    // the first listed theme if it somehow did not run.
+    apply(root.dataset.theme || options[0]?.dataset.themeOption);
+
+    toggle.addEventListener('click', () => {
+      const open = panel.hasAttribute('hidden');
+      panel.toggleAttribute('hidden', !open);
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+
+    for (const option of options) {
+      option.addEventListener('click', () => apply(option.dataset.themeOption));
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !panel.hasAttribute('hidden')) {
+        panel.setAttribute('hidden', '');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,65 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { DesignPiece } from '../data/designs';
+
+interface Props {
+  piece: DesignPiece;
+  widths: number[];
+  sizes: string;
+  /**
+   * flat — transparent art sitting straight on the page (stickers, planet);
+   * framed — opaque artwork as a rounded tile;
+   * card — framed plus a blush border for pieces on white backgrounds.
+   */
+  frame?: 'flat' | 'framed' | 'card';
+}
+
+const { piece, widths, sizes, frame = 'framed' } = Astro.props;
+const full = await getImage({ src: piece.image, width: 1600, format: 'webp' });
+---
+
+<figure class:list={['piece', frame]}>
+  <button type="button" class="zoom" data-full={full.src} data-alt={piece.alt}>
+    <Image src={piece.image} alt={piece.alt} widths={widths} sizes={sizes} />
+    <span class="visually-hidden">— view larger</span>
+  </button>
+  {piece.caption && <figcaption>{piece.caption}</figcaption>}
+</figure>
+
+<style>
+  .piece {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .zoom {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+  }
+
+  .zoom img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .framed .zoom img,
+  .card .zoom img {
+    border-radius: 14px;
+  }
+
+  .card .zoom img {
+    background: var(--color-surface);
+    border: 1px solid var(--color-tint);
+  }
+
+  figcaption {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    margin-top: 0.6rem;
+  }
+</style>

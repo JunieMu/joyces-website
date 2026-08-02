@@ -1,0 +1,245 @@
+---
+import DesignFigure from './DesignFigure.astro';
+import { INTRO, devfest, stuco, personal } from '../data/designs';
+---
+
+<section id="designs" class="section">
+  <div class="container">
+    <h2 class="section-title">Designs</h2>
+    <p class="intro">{INTRO}</p>
+
+    <div class="group">
+      <h3>{devfest.heading}</h3>
+      <p>{devfest.blurb}</p>
+
+      <div class="set-row">
+        <div class="sticker-block" role="group" aria-label="DevFest 2026 sticker set">
+          <div class="sticker-trio">
+            {
+              devfest.stickers.map((piece) => (
+                <DesignFigure
+                  piece={piece}
+                  frame="flat"
+                  widths={[240, 480, 720]}
+                  sizes="(max-width: 44rem) 28vw, 10rem"
+                />
+              ))
+            }
+          </div>
+          <p class="row-caption">{devfest.stickersCaption}</p>
+        </div>
+        <DesignFigure
+          piece={devfest.planet}
+          frame="flat"
+          widths={[280, 560, 840]}
+          sizes="(max-width: 44rem) 100vw, 13rem"
+        />
+      </div>
+
+      <div class="site-row">
+        <DesignFigure
+          piece={devfest.background}
+          widths={[440, 880, 1320]}
+          sizes="(max-width: 44rem) 100vw, 27rem"
+        />
+        <DesignFigure
+          piece={devfest.mascot}
+          frame="card"
+          widths={[280, 560, 840]}
+          sizes="(max-width: 44rem) 90vw, 17rem"
+        />
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>{stuco.heading}</h3>
+      <p>{stuco.blurb}</p>
+
+      <div class="tee-pair">
+        <DesignFigure
+          piece={stuco.front}
+          widths={[320, 640, 960]}
+          sizes="(max-width: 44rem) 100vw, 19rem"
+        />
+        <DesignFigure
+          piece={stuco.back}
+          widths={[320, 640, 960]}
+          sizes="(max-width: 44rem) 100vw, 19rem"
+        />
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>{personal.heading}</h3>
+      <p>{personal.blurb}</p>
+
+      <div class="personal-row">
+        {
+          personal.pieces.map((piece, index) => (
+            <DesignFigure
+              piece={piece}
+              widths={index === 0 ? [280, 560, 840] : [440, 880, 1320]}
+              sizes={
+                index === 0 ? '(max-width: 44rem) 100vw, 16rem' : '(max-width: 44rem) 100vw, 27rem'
+              }
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<dialog class="lightbox">
+  <button type="button" class="close" aria-label="Close">&times;</button>
+  <img alt="" />
+</dialog>
+
+<script>
+  const lightbox = document.querySelector<HTMLDialogElement>('.lightbox');
+  const lightboxImg = lightbox?.querySelector('img');
+
+  if (lightbox && lightboxImg) {
+    document.querySelectorAll<HTMLButtonElement>('#designs .zoom').forEach((button) => {
+      button.addEventListener('click', () => {
+        lightboxImg.src = button.dataset.full ?? '';
+        lightboxImg.alt = button.dataset.alt ?? '';
+        lightbox.showModal();
+      });
+    });
+
+    // Clicks on the dialog itself (the backdrop area) close it; clicks on the image don't.
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) lightbox.close();
+    });
+    lightbox.querySelector('.close')?.addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('close', () => {
+      lightboxImg.removeAttribute('src');
+      lightboxImg.alt = '';
+    });
+  }
+</script>
+
+<style>
+  .intro {
+    margin-bottom: 2.5rem;
+  }
+
+  .group {
+    border-top: 1px solid var(--color-tint);
+    padding-top: 2rem;
+    margin-top: 2.75rem;
+  }
+
+  .group:first-of-type {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 1.375rem;
+    margin-bottom: 0.5em;
+  }
+
+  /* Band 1 of the DevFest set: sticker trio with its shared caption, planet beside it. */
+  .set-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 13rem;
+    gap: 2rem;
+    align-items: center;
+    max-width: 46rem;
+    margin-top: 1.75rem;
+  }
+
+  .sticker-trio {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .row-caption {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    text-align: center;
+    margin: 0.9rem 0 0;
+  }
+
+  /* Band 2: site background beside the 2027 mascot card. The column ratio matches
+     the two aspect ratios so the pieces land at equal height. */
+  .site-row {
+    display: grid;
+    grid-template-columns: 1.65fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    max-width: 46rem;
+    margin-top: 2.5rem;
+  }
+
+  .tee-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    max-width: 40rem;
+    margin-top: 1.75rem;
+  }
+
+  .personal-row {
+    display: grid;
+    grid-template-columns: 1fr 1.7fr;
+    gap: 2rem;
+    align-items: start;
+    max-width: 44rem;
+    margin-top: 1.75rem;
+  }
+
+  .lightbox {
+    border: 0;
+    border-radius: 16px;
+    padding: 0.75rem;
+    background: var(--color-bg);
+    max-width: min(92vw, 75rem);
+  }
+
+  .lightbox::backdrop {
+    background: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  }
+
+  .lightbox img {
+    display: block;
+    max-width: 100%;
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    margin-inline: auto;
+    border-radius: 8px;
+  }
+
+  .close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--color-tint);
+    border-radius: 50%;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-size: 1.125rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .close:hover {
+    color: var(--color-accent);
+    border-color: currentColor;
+  }
+
+  @media (max-width: 44rem) {
+    .set-row,
+    .site-row,
+    .tee-pair,
+    .personal-row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

@@ -1,16 +1,20 @@
-/* Design tokens — contrast ratios verified 2026-07-27 (WCAG 2.1, vs --color-bg unless noted). */
+/* Design tokens — contrast ratios verified 2026-07-27 (WCAG 2.1, vs --color-bg unless noted).
+   These are the shipped "Blush" values. Token names are deliberately theme-neutral
+   (tint/wash, not blush/cream) so alternate palettes can fill the same contract —
+   see src/data/themes.ts and the dev-only ThemePicker. */
 :root {
   /* canvas & text */
   --color-bg: #fffcfa;          /* warm off-white canvas */
   --color-ink: #241d20;         /* headings/body — 16.17:1 AA */
   --color-muted: #6e5a5e;       /* secondary text — 6.25:1 AA */
 
-  /* accent system: blush is decorative; rose does the interactive work */
+  /* accent system: the tint is decorative; the accent does the interactive work */
   --color-accent: #a84e59;      /* links, buttons — 5.27:1 AA; white-on-accent 5.39:1 AA */
-  --color-accent-deep: #96404c; /* text sitting ON blush tint — 4.75:1 AA vs #facfcf */
-  --color-blush: #facfcf;       /* THE Joyce pink — borders, hovers, underlines, tints only */
-  --color-blush-wash: #fceae8;  /* section wash, decorative */
-  --color-cream: #fdf3e3;       /* optional secondary wash, decorative */
+  --color-accent-deep: #96404c; /* text sitting ON the tint — 4.75:1 AA vs #facfcf */
+  --color-tint: #facfcf;        /* THE Joyce pink — borders, hovers, underlines, tints only */
+  --color-wash: #fceae8;        /* section wash, decorative */
+  --color-wash-alt: #fdf3e3;    /* optional secondary wash, decorative */
+  --color-surface: #ffffff;     /* raised surface behind screenshots */
 
   --font-display: 'Fraunces Variable', Georgia, serif;
   --font-body: 'Work Sans Variable', system-ui, sans-serif;
@@ -76,7 +80,7 @@ p {
 a {
   color: var(--color-accent);
   text-decoration: underline;
-  text-decoration-color: var(--color-blush);
+  text-decoration-color: var(--color-tint);
   text-decoration-thickness: 2px;
   text-underline-offset: 0.2em;
   transition: color 120ms ease, text-decoration-color 120ms ease;
@@ -112,6 +116,14 @@ ul {
 
 .section {
   padding-block: var(--space-section);
+}
+
+/* Alternating full-bleed bands separate the major sections — the seam does the
+   work a divider rule would, and it completes the blush the hero and footer
+   already bookend the page with. Verified vs --color-wash: ink 14.21:1
+   AAA, muted 5.50:1 AA, accent 4.64:1 AA. */
+.section--wash {
+  background-color: var(--color-wash);
 }
 
 .section-title {
