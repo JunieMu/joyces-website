@@ -79,7 +79,7 @@ export const personal = {
     {
       image: postcard,
       alt: 'Illustration of a girl with long dark hair listening to earbuds and hugging an open bag of chips beneath a string of party pennants, in a lavender frame',
-      caption: 'A birthday postcard I made for my best friend',
+      caption: 'A birthday postcard I made for my friend',
     },
     {
       image: wallpaper,
