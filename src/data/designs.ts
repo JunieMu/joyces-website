@@ -6,10 +6,13 @@ import sticker3 from '../assets/designs/columbiaADI/sticker3.PNG';
 import planet from '../assets/designs/columbiaADI/websiteplanet.png';
 import background from '../assets/designs/columbiaADI/websitebackgroundbrainstorm.png';
 import mascot2027 from '../assets/designs/columbiaADI/websitemascot2027.png';
+import mascot2027_2 from '../assets/designs/columbiaADI/websitemascot2027_2.png';
 import teeFront from '../assets/designs/rrhsSTUCO/stucoteefront.PNG';
 import teeBack from '../assets/designs/rrhsSTUCO/stucoteeback.PNG';
 import postcard from '../assets/designs/personal/postcard.png';
 import wallpaper from '../assets/designs/personal/wallpaperart.png';
+import swanwallpaper from '../assets/designs/personal/swanwallpaper.png';
+import birdwallpaper from '../assets/designs/personal/birdwallpaper.png';
 
 export interface DesignPiece {
   image: ImageMetadata;
@@ -54,6 +57,16 @@ export const devfest = {
     alt: 'Watercolor lion-mermaid mascot with a curly orange mane, a small blue crown, and a rainbow-scaled tail',
     caption: 'Sneak peek: DevFest 2027 mascot',
   } satisfies DesignPiece,
+  mascot_2: {
+    image: mascot2027_2,
+    alt: '2nd iteration of watercolor lion-mermaid mascot with a curly orange mane, a small blue crown, and a rainbow-scaled tail',
+    caption: 'Working 2nd iteration of DevFest 2027 mascot',
+  } satisfies DesignPiece,
+  goldfish: {
+    image: wallpaper,
+    alt: 'Two goldfish swimming between looping yellow ribbon swirls and small blue sparkles on a cream background',
+    caption: 'Concept sketch for DevFest 2027 underwater art style',
+  } satisfies DesignPiece,
 };
 
 export const stuco = {
@@ -81,10 +94,15 @@ export const personal = {
       alt: 'Illustration of a girl with long dark hair listening to earbuds and hugging an open bag of chips beneath a string of party pennants, in a lavender frame',
       caption: 'A birthday postcard I made for my friend',
     },
+    // {
+    //   image: swanwallpaper,
+    //   alt: 'White swan swimming amongst green swirls and flowers',
+    //   caption: 'Swan wallpaper for my notion',
+    // },
     {
-      image: wallpaper,
-      alt: 'Two goldfish swimming between looping yellow ribbon swirls and small blue sparkles on a cream background',
-      caption: 'A goldfish wallpaper for my desktop',
+      image: birdwallpaper,
+      alt: 'Red cardinal perched amonst flowering branches and yellow ribbon swirls',
+      caption: 'Red cardinal wallpaper for my notion',
     },
   ] satisfies DesignPiece[],
 };
